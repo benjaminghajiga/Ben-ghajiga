@@ -5,6 +5,7 @@ export interface SocialLinks {
   email: string;
   website?: string;
   devto?: string;
+  phone?: string;
 }
 
 export interface MetricHighlight {
@@ -50,7 +51,7 @@ export interface ProjectItem {
   subtitle: string;
   summary: string;
   fullDescription: string;
-  category: 'Full-Stack' | 'AI & ML' | 'Cloud & Systems' | 'Developer Tools' | 'Frontend';
+  category: 'Full-Stack' | 'Web3 & Blockchain' | 'Developer Tools' | 'Frontend' | 'Media & Design';
   tags: string[];
   featured: boolean;
   metrics: string;
@@ -78,6 +79,22 @@ export interface SkillCategory {
   description: string;
   iconName: string;
   skills: SkillItem[];
+}
+
+export interface LeadershipItem {
+  id: string;
+  role: string;
+  organization: string;
+  description: string;
+  highlights: string[];
+}
+
+export interface AchievementItem {
+  id: string;
+  title: string;
+  event: string;
+  year: string;
+  description: string;
 }
 
 export interface BlogPost {
@@ -109,10 +126,12 @@ export interface ContactMessage {
 export interface ProfileData {
   name: string;
   roleTitle: string;
+  phone?: string;
   shortBio: string;
   fullBioParagraphs: string[];
   location: string;
   email: string;
+  website?: string;
   availability: {
     status: 'Available' | 'Selective' | 'Booked';
     message: string;
@@ -122,3 +141,4 @@ export interface ProfileData {
   metrics: MetricHighlight[];
   terminalCommands: Record<string, string>;
 }
+

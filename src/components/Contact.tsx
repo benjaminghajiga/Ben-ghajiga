@@ -312,7 +312,7 @@ export const Contact: React.FC<ContactProps> = ({ profile }) => {
                   className="p-3 rounded-xl bg-slate-50 border border-slate-200 hover:border-indigo-200 text-slate-700 hover:text-indigo-600 hover:bg-white flex items-center gap-2.5 transition-all text-xs font-medium"
                 >
                   <Sparkles className="w-4 h-4 text-slate-500" />
-                  <span>bghajiga.dev</span>
+                  <span>ben-ghajiga.ai.studio</span>
                 </a>
               </div>
             </div>

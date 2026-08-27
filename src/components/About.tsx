@@ -13,8 +13,18 @@ import {
   Zap,
   ShieldCheck,
   Code2,
+  Trophy,
+  Users,
 } from 'lucide-react';
-import { ProfileData, ExperienceItem, EducationItem, CertificationItem } from '../types';
+import {
+  ProfileData,
+  ExperienceItem,
+  EducationItem,
+  CertificationItem,
+  LeadershipItem,
+  AchievementItem,
+} from '../types';
+import { LEADERSHIP_DATA, ACHIEVEMENTS_DATA } from '../data/portfolioData';
 
 interface AboutProps {
   profile: ProfileData;
@@ -29,28 +39,28 @@ export const About: React.FC<AboutProps> = ({
   education,
   certifications,
 }) => {
-  const [activeTab, setActiveTab] = useState<'story' | 'experience' | 'education'>('story');
+  const [activeTab, setActiveTab] = useState<'story' | 'experience' | 'education' | 'community'>('story');
 
   const engineeringPrinciples = [
     {
       icon: <Zap className="w-5 h-5 text-indigo-600" />,
-      title: 'Zero-Latency UX',
-      desc: 'Optimistic updates, local-first syncing, and minimal bundle footprints for instantaneous response times.',
+      title: 'Full-Stack Execution',
+      desc: 'End-to-end craftsmanship from Figma/Framer UI prototypes to performant Next.js, Node.js REST APIs, and database architecture.',
     },
     {
       icon: <Cpu className="w-5 h-5 text-indigo-600" />,
-      title: 'Resilient Microservices',
-      desc: 'Fault-tolerant distributed pipelines using backpressure control, idempotency keys, and stream processing.',
+      title: 'Web3 & Smart Contracts',
+      desc: 'Trustless escrow mechanisms, decentralized dApps, wallet onboarding, and multi-chain integrations (Algorand, Cardano, Solidity).',
     },
     {
       icon: <ShieldCheck className="w-5 h-5 text-emerald-600" />,
-      title: 'Zero-Trust Security',
-      desc: 'Principle of least privilege, strict JSON Schema enforcement, and air-gapped tenant segregation.',
+      title: 'Reliability & Standards',
+      desc: 'Strict TypeScript typing, modular database schemas (PostgreSQL, MongoDB, Prisma), and containerized cloud deployments.',
     },
     {
-      icon: <Layers className="w-5 h-5 text-indigo-600" />,
-      title: 'Craft & Ergonomics',
-      desc: 'Obsessive attention to typography, spatial hierarchy, keyboard navigation, and developer accessibility.',
+      icon: <Sparkles className="w-5 h-5 text-indigo-600" />,
+      title: 'Multimedia & Storytelling',
+      desc: 'High-definition video production, motion graphics, and crisp visual branding that effectively communicate technical value.',
     },
   ];
 
@@ -65,48 +75,61 @@ export const About: React.FC<AboutProps> = ({
               <span>Background & Journey</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
-              Biography & Experience
+              Biography, Career & Community
             </h2>
           </div>
 
           {/* Tab Navigation */}
-          <div className="flex items-center p-1 bg-slate-100 rounded-full border border-slate-200 self-start md:self-auto text-xs sm:text-sm">
+          <div className="flex items-center p-1 bg-slate-100 rounded-full border border-slate-200 self-start md:self-auto text-xs sm:text-sm flex-wrap gap-1">
             <button
               id="about-tab-story"
               onClick={() => setActiveTab('story')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full font-medium transition-all ${
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-medium transition-all ${
                 activeTab === 'story'
                   ? 'bg-white text-indigo-600 shadow-xs font-semibold'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              <User className="w-4 h-4" />
+              <User className="w-3.5 h-3.5" />
               <span>My Story</span>
             </button>
 
             <button
               id="about-tab-experience"
               onClick={() => setActiveTab('experience')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full font-medium transition-all ${
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-medium transition-all ${
                 activeTab === 'experience'
                   ? 'bg-white text-indigo-600 shadow-xs font-semibold'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              <Briefcase className="w-4 h-4" />
-              <span>Career ({experiences.length})</span>
+              <Briefcase className="w-3.5 h-3.5" />
+              <span>Experience ({experiences.length})</span>
+            </button>
+
+            <button
+              id="about-tab-community"
+              onClick={() => setActiveTab('community')}
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-medium transition-all ${
+                activeTab === 'community'
+                  ? 'bg-white text-indigo-600 shadow-xs font-semibold'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <Users className="w-3.5 h-3.5" />
+              <span>Leadership & Awards</span>
             </button>
 
             <button
               id="about-tab-education"
               onClick={() => setActiveTab('education')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full font-medium transition-all ${
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-medium transition-all ${
                 activeTab === 'education'
                   ? 'bg-white text-indigo-600 shadow-xs font-semibold'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              <GraduationCap className="w-4 h-4" />
+              <GraduationCap className="w-3.5 h-3.5" />
               <span>Education & Certs</span>
             </button>
           </div>
@@ -131,7 +154,11 @@ export const About: React.FC<AboutProps> = ({
                   </div>
                   <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200">
                     <Code2 className="w-3.5 h-3.5 text-indigo-600" />
-                    <span>8+ Years in Production Engineering</span>
+                    <span>4+ Years in Full-Stack & Web3</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-50 border border-amber-200 text-amber-900">
+                    <Trophy className="w-3.5 h-3.5 text-amber-600" />
+                    <span>1st Place Winner — 2025 Model and I Hackathon</span>
                   </div>
                 </div>
               </div>
@@ -157,7 +184,7 @@ export const About: React.FC<AboutProps> = ({
 
                 <div className="space-y-3">
                   <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
-                    Target Opportunities
+                    Target Roles & Engagements
                   </h4>
                   <div className="flex flex-wrap gap-1.5">
                     {profile.availability.targetRoles.map((role, idx) => (
@@ -176,16 +203,20 @@ export const About: React.FC<AboutProps> = ({
                     <span className="text-slate-500 font-medium">Availability</span>
                     <span className="font-semibold text-emerald-700 flex items-center gap-1">
                       <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                      Immediate / Q3 2026
+                      Open for Full-Stack & Web3 Projects
                     </span>
                   </div>
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-500 font-medium">Work Authorization</span>
-                    <span className="text-slate-800 font-medium">UK Citizen & Global Remote</span>
+                    <span className="text-slate-500 font-medium">Work Arrangement</span>
+                    <span className="text-slate-800 font-medium">Remote Worldwide & On-Site</span>
                   </div>
                   <div className="flex items-center justify-between text-xs">
                     <span className="text-slate-500 font-medium">Timezone</span>
-                    <span className="text-slate-800 font-medium">UTC / GMT (flexible overlap)</span>
+                    <span className="text-slate-800 font-medium">Africa/Lagos (WAT, UTC+1)</span>
+                  </div>
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-slate-500 font-medium">Phone</span>
+                    <span className="text-slate-800 font-mono font-medium">{profile.phone || '(+234) 7035319985'}</span>
                   </div>
                 </div>
               </div>
@@ -195,7 +226,7 @@ export const About: React.FC<AboutProps> = ({
             <div className="pt-6">
               <h3 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-indigo-600" />
-                <span>Core Architectural Principles</span>
+                <span>Core Engineering & Product Principles</span>
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {engineeringPrinciples.map((item, idx) => (
@@ -237,7 +268,7 @@ export const About: React.FC<AboutProps> = ({
                           </h3>
                           {exp.current && (
                             <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
-                              Current Role
+                              Active Role
                             </span>
                           )}
                         </div>
@@ -265,7 +296,7 @@ export const About: React.FC<AboutProps> = ({
                     {/* Achievements */}
                     <div className="space-y-2 pt-1">
                       <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
-                        Key Accomplishments & Impact
+                        Key Accomplishments & Responsibilities
                       </h4>
                       <ul className="space-y-1.5">
                         {exp.achievements.map((ach, aIdx) => (
@@ -280,7 +311,7 @@ export const About: React.FC<AboutProps> = ({
                     {/* Tech stack badges */}
                     <div className="pt-2 flex flex-wrap items-center gap-1.5 border-t border-slate-100">
                       <span className="text-[11px] font-mono text-slate-400 mr-1">
-                        Stack:
+                        Stack & Tools:
                       </span>
                       {exp.techStack.map((tech, tIdx) => (
                         <span
@@ -298,14 +329,102 @@ export const About: React.FC<AboutProps> = ({
           </div>
         )}
 
-        {/* Tab 3: Education & Certifications */}
+        {/* Tab 3: Leadership & Awards */}
+        {activeTab === 'community' && (
+          <div className="space-y-8">
+            {/* Hackathon Awards */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-2 text-slate-900 text-xl font-bold">
+                <Trophy className="w-5 h-5 text-amber-500" />
+                <h3>Hackathons & Honors</h3>
+              </div>
+
+              <div className="grid grid-cols-1 gap-4">
+                {ACHIEVEMENTS_DATA.map((ach) => (
+                  <div
+                    key={ach.id}
+                    className="p-6 rounded-2xl bg-gradient-to-r from-amber-50/60 via-white to-white border border-amber-200/70 shadow-sm space-y-2"
+                  >
+                    <div className="flex items-center justify-between flex-wrap gap-2">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-9 h-9 rounded-lg bg-amber-100 border border-amber-200 text-amber-700 flex items-center justify-center font-bold">
+                          <Trophy className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <h4 className="text-base sm:text-lg font-bold text-slate-900">
+                            {ach.title}
+                          </h4>
+                          <p className="text-xs font-semibold text-amber-700">
+                            {ach.event}
+                          </p>
+                        </div>
+                      </div>
+                      <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-100 text-amber-900 border border-amber-200">
+                        {ach.year}
+                      </span>
+                    </div>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pt-1">
+                      {ach.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Leadership & Community Building */}
+            <div className="space-y-4 pt-4">
+              <div className="flex items-center gap-2 text-slate-900 text-xl font-bold">
+                <Users className="w-5 h-5 text-indigo-600" />
+                <h3>Leadership & Community Initiatives</h3>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {LEADERSHIP_DATA.map((lead) => (
+                  <div
+                    key={lead.id}
+                    className="p-6 rounded-2xl bg-white border border-slate-100 shadow-sm space-y-4 hover:border-indigo-200 transition-all"
+                  >
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <h4 className="text-lg font-bold text-slate-900">
+                          {lead.role}
+                        </h4>
+                        <p className="text-sm font-semibold text-indigo-600">
+                          {lead.organization}
+                        </p>
+                      </div>
+                      <div className="p-2 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-600">
+                        <Users className="w-4 h-4" />
+                      </div>
+                    </div>
+
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                      {lead.description}
+                    </p>
+
+                    <ul className="space-y-1.5 pt-2 text-xs sm:text-sm text-slate-600 border-t border-slate-100">
+                      {lead.highlights.map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-indigo-600 shrink-0 mt-0.5" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Tab 4: Education & Certifications */}
         {activeTab === 'education' && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Education */}
             <div className="lg:col-span-6 space-y-6">
               <div className="flex items-center gap-2 text-slate-900 text-xl font-bold">
                 <GraduationCap className="w-5 h-5 text-indigo-600" />
-                <h3>Academic Background</h3>
+                <h3>Academic Education</h3>
               </div>
 
               {education.map((edu) => (
@@ -349,7 +468,7 @@ export const About: React.FC<AboutProps> = ({
             <div className="lg:col-span-6 space-y-6">
               <div className="flex items-center gap-2 text-slate-900 text-xl font-bold">
                 <Award className="w-5 h-5 text-indigo-600" />
-                <h3>Industry Certifications</h3>
+                <h3>Certifications & Courses</h3>
               </div>
 
               <div className="space-y-3">

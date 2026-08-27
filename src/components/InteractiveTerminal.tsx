@@ -101,7 +101,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
           <div className="w-3 h-3 rounded-full bg-amber-500/80" />
           <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
           <span className="ml-2 text-xs font-mono text-slate-400">
-            bghajiga@workstation:~/{activeTab}
+            Benjaminghajiga@workstation:~/{activeTab}
           </span>
         </div>
 
